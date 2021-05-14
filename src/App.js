@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import {Grid} from "@material-ui/core"
+import {AnimatePresence, AnimateSharedLayout} from "framer-motion";
+import {useState} from "react"
+import './App.css'
+import Camera from "./Camera"
+import CameraCard from "./CameraCard"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const cameras = [
+    {name: 'Camera 1'},
+    {name: 'Camera 2'},
+    {name: 'Camera 3'},
+    {name: 'Camera 4'}
+]
+
+const App = () => {
+    const [element, setElement] = useState()
+    const [activeCamera, setActiveCamera] = useState()
+
+    return (
+        <div className="App">
+            <AnimateSharedLayout type='crossfade'>
+                <Grid container spacing={5} style={{width: 1600, margin: 'auto'}}>
+                    {cameras.map((c, i) => (
+                        <Grid item xs={6}>
+                            <CameraCard key={i} index={i} name={c.name} {...{setActiveCamera}}/>
+                        </Grid>
+                    ))}
+                </Grid>
+                <AnimatePresence>
+                    {typeof activeCamera === 'number' && (
+                        <Camera
+                            index={activeCamera}
+                            camera={cameras[activeCamera]}
+                            {...{setActiveCamera, element, setElement}}
+                        />
+                    )}
+                </AnimatePresence>
+            </AnimateSharedLayout>
+        </div>
+    )
 }
 
-export default App;
+export default App
