@@ -5,7 +5,7 @@ import {useState} from "react"
 import './App.css'
 import Camera from "./Camera"
 import CameraLarge from "./CameraLarge"
-import Navigator from "./Navigator";
+import Navigator from "./Navigator"
 
 const theme = createMuiTheme({
     typography: {fontFamily: 'Nunito'}

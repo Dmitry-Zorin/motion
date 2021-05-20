@@ -6,6 +6,7 @@ const CameraObjects = ({index, large, height}) => {
         <>
             <Train {...{large}}/>
             <Human {...{index, large, height}}/>
+            <Human {...{index, large, height}}/>
         </>
     )
 }

@@ -34,7 +34,7 @@ const Camera = ({index, setActiveCam}) => {
             layoutId={index}
         >
             {height && (
-                <CameraObjects {...{height}}/>
+                <CameraObjects {...{index, height}}/>
             )}
         </motion.div>
     )

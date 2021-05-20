@@ -61,7 +61,7 @@ const CameraLarge = ({index, cam, setActiveCam}) => {
                 layoutId={index}
                 onClick={e => zoom === 100 && !element && setElement(e)}
             >
-                <CameraObjects large/>
+                <CameraObjects large {...{index}}/>
             </motion.div>
         </div>
     )

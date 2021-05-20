@@ -3,24 +3,14 @@ import {motion} from "framer-motion"
 import {useContext} from "react"
 import CoordsContext from "./CoordsContext"
 
-const Human = ({height, large}) => {
-    const coords = useContext(CoordsContext)
+const Human = ({index, height = 0.9 * window.innerHeight, large}) => {
+    let {x, y} = useContext(CoordsContext)[index - 1]
 
     const size = large ? 30 : 15
     const diff = large ? 6 : 3
 
-    let {x, y} = coords
-
-    if (large) {
-        x *= 1.6 * window.innerHeight
-        y *= 0.9 * window.innerHeight
-    } else {
-        x *= 16 / 9 * height
-        y *= height
-    }
-
-    x -= size / 2 + diff
-    y -= size / 2 + diff
+    x = x * 16 / 9 * height - size / 2 + diff
+    y = y * height - size / 2 + diff
 
     return (
         <motion.div
@@ -30,7 +20,8 @@ const Human = ({height, large}) => {
                 height: size,
                 borderRadius: '100%',
                 background: 'white',
-                transition: 'transform 3s linear'
+                transition: 'transform 1s linear',
+                position: 'absolute'
             }}
         >
             <FaceIcon
