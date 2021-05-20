@@ -3,12 +3,12 @@ import {motion} from "framer-motion"
 import {useContext} from "react"
 import CoordsContext from "./CoordsContext"
 
-const Human = ({index, height = 0.9 * window.innerHeight, large, setIsCloseToDoors}) => {
-    let {x, y} = useContext(CoordsContext)[index - 1]
+const Human = ({num, index, height = 0.9 * window.innerHeight, large, setIsCloseToDoors}) => {
+    let {x, y} = useContext(CoordsContext)[index - 1][num]
     let size, diff, trainHeight
 
     if (large) {
-        size = 30
+        size = 60
         diff = 6
         trainHeight = 115
     } else {
@@ -20,7 +20,11 @@ const Human = ({index, height = 0.9 * window.innerHeight, large, setIsCloseToDoo
     x = x * 16 / 9 * height - size / 2 + diff
     y = y * height - size / 2 + diff
 
-    setIsCloseToDoors(y < trainHeight)
+    setIsCloseToDoors(e => {
+        const newE = [...e]
+        newE[num] = y < trainHeight
+        return newE[num] === e[num] ? e : newE
+    })
 
     return (
         <motion.div
