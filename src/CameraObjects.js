@@ -1,12 +1,14 @@
+import {useState} from "react"
 import Human from "./Human"
 import Train from "./Train"
 
 const CameraObjects = ({index, large, height}) => {
+    const [isCloseToDoors, setIsCloseToDoors] = useState(false)
+
     return (
         <>
-            <Train {...{large}}/>
-            <Human {...{index, large, height}}/>
-            <Human {...{index, large, height}}/>
+            <Train {...{large, isCloseToDoors}}/>
+            <Human {...{index, large, height, setIsCloseToDoors}}/>
         </>
     )
 }

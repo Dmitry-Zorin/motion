@@ -25,11 +25,11 @@ const Camera = ({index, setActiveCam}) => {
         <motion.div
             ref={cam}
             className={`Camera ${classes.card}`}
-            onClick={() => setActiveCam(index)}
             onMouseOver={() => animation.start({scale: 1.05})}
             onMouseOut={() => animation.start({scale: 1})}
-            layoutId={index}
+            onClick={() => setActiveCam(index)}
             animate={animation}
+            layoutId={index}
         >
             {height && (
                 <CameraObjects {...{index, height}}/>
