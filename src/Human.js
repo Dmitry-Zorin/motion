@@ -1,28 +1,46 @@
-import {Paper} from "@material-ui/core"
 import FaceIcon from "@material-ui/icons/Face"
 import {motion} from "framer-motion"
+import {useContext} from "react"
+import CoordsContext from "./CoordsContext"
 
-const size = 30
-const border = 4
+const Human = ({height, large}) => {
+    const coords = useContext(CoordsContext)
 
-const Human = ({x = 'calc(96vh - 120px)', y = '48vh'}) => (
-    <motion.div style={{x, y, position: 'relative'}}>
-        <Paper
+    const size = large ? 30 : 15
+    const diff = large ? 6 : 3
+
+    let {x, y} = coords
+
+    if (large) {
+        x *= 1.6 * window.innerHeight
+        y *= 0.9 * window.innerHeight
+    } else {
+        x *= 16 / 9 * height
+        y *= height
+    }
+
+    x -= size / 2 + diff
+    y -= size / 2 + diff
+
+    return (
+        <motion.div
             style={{
-                transform: `translate(${border}px, ${border}px)`,
+                x, y,
                 width: size,
                 height: size,
                 borderRadius: '100%',
                 background: 'white',
-                position: 'absolute',
-            }}/>
-        <FaceIcon
-            style={{
-                fontSize: size + 2 * border,
-                position: 'absolute'
+                transition: 'transform 3s linear'
             }}
-        />
-    </motion.div>
-)
+        >
+            <FaceIcon
+                style={{
+                    transform: `translate(-${diff}px, -${diff}px)`,
+                    fontSize: size + 2 * diff,
+                }}
+            />
+        </motion.div>
+    )
+}
 
 export default Human

@@ -1,7 +1,7 @@
 import {IconButton, Typography} from "@material-ui/core"
 import YoutubeSearchedForIcon from "@material-ui/icons/YoutubeSearchedFor"
 
-const GUI = ({title, animation, zoom, setZoom}) => (
+const GUI = ({title = 'Camera', animation, zoom, setZoom}) => (
     <div
         style={{
             position: 'absolute',
@@ -20,19 +20,18 @@ const GUI = ({title, animation, zoom, setZoom}) => (
             {title}
         </Typography>
         <div style={{display: 'flex', alignItems: 'center'}}>
-            <IconButton style={{color: 'white'}} component='div' onClick={() => {
-                animation.start({
-                    scale: 1,
-                    x: 0,
-                    y: 0,
-                    transition: {
-                        type: 'spring',
-                        bounce: 0,
-                        duration: 0.4
-                    }
-                })
-                setZoom(100)
-            }}>
+            <IconButton
+                style={{color: 'white'}}
+                component='div'
+                onClick={() => {
+                    animation.start({
+                        x: 0,
+                        y: 0,
+                        scale: 1,
+                        cursor: 'zoom-in'
+                    })
+                    setZoom(100)
+                }}>
                 <YoutubeSearchedForIcon fontSize='large'/>
             </IconButton>
             <Typography variant='h4'>

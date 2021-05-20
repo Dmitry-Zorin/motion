@@ -1,27 +1,8 @@
-.Container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-
-.Background {
-    z-index: 2;
-    cursor: pointer;
-    background: rgba(0, 0, 0, 0.85)
-}
-
 .Camera {
-    width: 96vh;
-    height: 96vh;
-    background: #51545B;
-    border-radius: 25px;
+    aspect-ratio: 16 / 9;
+    background: #CBBFBB;
     position: relative;
     overflow: hidden;
-    z-index: 3;
-    cursor: grab;
+    border-radius: 10px;
+    cursor: pointer;
 }
