@@ -1,5 +1,5 @@
 import {makeStyles} from "@material-ui/core"
-import {motion, useMotionValue} from "framer-motion"
+import {motion, useAnimation} from "framer-motion"
 import {useEffect, useRef, useState} from "react"
 import './Camera.css'
 import CameraObjects from "./CameraObjects"
@@ -15,9 +15,9 @@ const useStyles = makeStyles((theme) => ({
 
 const Camera = ({index, setActiveCam}) => {
     const classes = useStyles()
-    const scale = useMotionValue(1)
     const cam = useRef()
     const [height, setHeight] = useState()
+    const animation = useAnimation()
 
     useEffect(() => setHeight(cam.current.offsetHeight), [])
 
@@ -25,13 +25,11 @@ const Camera = ({index, setActiveCam}) => {
         <motion.div
             ref={cam}
             className={`Camera ${classes.card}`}
-            style={{scale}}
-            onClick={() => {
-                setActiveCam(index)
-                scale.set(1)
-            }}
-            whileHover={{scale: 1.05}}
+            onClick={() => setActiveCam(index)}
+            onMouseOver={() => animation.start({scale: 1.05})}
+            onMouseOut={() => animation.start({scale: 1})}
             layoutId={index}
+            animate={animation}
         >
             {height && (
                 <CameraObjects {...{index, height}}/>
