@@ -1,6 +1,6 @@
 import FaceIcon from "@material-ui/icons/Face"
 import {motion} from "framer-motion"
-import {useContext} from "react"
+import {useContext, useEffect} from "react"
 import CoordsContext from "./CoordsContext"
 
 const Human = ({num, index, height = 0.9 * window.innerHeight, large, setIsCloseToDoors}) => {
@@ -20,11 +20,13 @@ const Human = ({num, index, height = 0.9 * window.innerHeight, large, setIsClose
     x = x * 16 / 9 * height - size / 2 + diff
     y = y * height - size / 2 + diff
 
-    setIsCloseToDoors(e => {
-        const newE = [...e]
-        newE[num] = y < trainHeight
-        return newE[num] === e[num] ? e : newE
-    })
+    useEffect(() => {
+        setIsCloseToDoors(e => {
+            const newE = [...e]
+            newE[num] = y < trainHeight
+            return newE[num] === e[num] ? e : newE
+        })
+    }, [num, setIsCloseToDoors, trainHeight, y])
 
     return (
         <motion.div

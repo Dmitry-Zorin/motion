@@ -2,10 +2,11 @@ import {motion, useAnimation} from "framer-motion"
 import {useEffect, useRef, useState} from "react"
 import './Camera.css'
 import './CameraLarge.css'
-import CameraObjects from "./CameraObjects";
 import GUI from "./GUI"
+import move from './cursors/move.svg'
+import zoomIn from './cursors/zoomIn.svg'
 
-const CameraLarge = ({index, cam, setActiveCam}) => {
+const CameraLarge = ({children, index, cam, setActiveCam, video}) => {
     const [zoom, setZoom] = useState(100)
     const [element, setElement] = useState()
     const animation = useAnimation()
@@ -27,7 +28,7 @@ const CameraLarge = ({index, cam, setActiveCam}) => {
         let y = translateY + (element.clientY - window.innerHeight / 2 - translateY) * ratio
         if (newScale === 1) x = y = 0
 
-        animation.start({x, y, scale: newScale, cursor: newScale > 1 ? 'grab' : 'zoom-in'})
+        animation.start({x, y, scale: newScale, cursor: newScale > 1 ? `url(${move}) 10 5, grab`: `url(${zoomIn}) 5 5, zoom-in`})
             .then(() => {
                 setZoom(100 * newScale)
                 setElement(null)
@@ -47,7 +48,10 @@ const CameraLarge = ({index, cam, setActiveCam}) => {
                     className='Container Background'
                     onClick={() => {
                         animation.start({x: 0, y: 0, scale: 1, transition: {duration: 0}})
-                            .then(() => setActiveCam(null))
+                            .then(() => {
+                                setActiveCam(null)
+                                video.value = false
+                            })
                     }}
                 />
             </motion.div>
@@ -60,8 +64,9 @@ const CameraLarge = ({index, cam, setActiveCam}) => {
                 transition={{type: 'spring', bounce: 0, duration: 0.5}}
                 layoutId={index}
                 onClick={e => zoom === 100 && !element && setElement(e)}
+                style={{aspectRatio: video.value && 'unset'}}
             >
-                <CameraObjects large {...{index}}/>
+                {children}
             </motion.div>
         </div>
     )

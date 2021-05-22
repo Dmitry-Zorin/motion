@@ -11,14 +11,14 @@
 
 .Background {
     z-index: 2;
-    cursor: pointer;
-    background: rgba(0, 0, 0, 0.7)
+    background: rgba(0, 0, 0, 0.7);
+    cursor: url('cursors/pointer.svg') 10 0, pointer;
 }
 
 .CameraLarge {
     height: 90vh;
     border-radius: 25px;
-    cursor: zoom-in;
     position: absolute;
     z-index: 3;
+    cursor: url('cursors/zoomIn.svg') 5 5, zoom-in;
 }

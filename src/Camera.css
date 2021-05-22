@@ -3,6 +3,6 @@
     background: #CBBFBB;
     position: relative;
     overflow: hidden;
-    border-radius: 10px;
-    cursor: pointer;
+    border-radius: 15px;
+    cursor: url('cursors/pointer.svg') 10 0, pointer;
 }

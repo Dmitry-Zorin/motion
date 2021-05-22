@@ -1,8 +1,7 @@
 import {useState} from "react"
 import Human from "./Human"
 import Train from "./Train"
-
-const numberOfPeople = 5
+import {numberOfPeople} from "./constants"
 
 const CameraObjects = ({index, large, height}) => {
     const [isCloseToDoors, setIsCloseToDoors] = useState([...Array(numberOfPeople).keys()].map(() => false))

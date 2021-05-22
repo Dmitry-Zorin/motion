@@ -2,6 +2,7 @@
   "name": "motion",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:4446",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

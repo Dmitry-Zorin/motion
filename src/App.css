@@ -3,4 +3,9 @@
     min-height: 100vh;
     position: relative;
     overflow: hidden;
+    cursor: url('cursors/default.svg'), default;
+}
+
+.MuiButtonBase-root {
+    cursor: url('cursors/pointer.svg') 10 0, pointer !important;
 }

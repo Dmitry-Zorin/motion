@@ -8,8 +8,7 @@ const Train = ({large, isCloseToDoors}) => {
 
     useEffect(() => {
         setTimeout(() => {
-            train.current.style.transitionDuration = '0.2s'
-            train.current.style.transitionDelay = '0.4s'
+            train.current.style.transition =  'all 0.2s ease 0.4s'
         }, 1000)
     }, [])
 
@@ -21,9 +20,7 @@ const Train = ({large, isCloseToDoors}) => {
                 height: large ? 100 : 25,
                 borderBottom: `${large ? 12 : 3}px solid #${isAnyoneCloseToDoors ? 'BC4B51' : '659B5E'}`,
                 background: isAnyoneCloseToDoors ? '#C27779' : '#80AC7A',
-                position: 'absolute',
-                transitionProperties: 'background-color, border',
-                transitionFunction: 'ease'
+                position: 'absolute'
             }}
         />
     )

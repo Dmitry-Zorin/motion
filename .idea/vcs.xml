@@ -2,5 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/librealsense" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/librealsense/third-party/libcurl" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/librealsense/ubuntu-xenial-hwe" vcs="Git" />
   </component>
 </project>
