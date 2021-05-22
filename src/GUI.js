@@ -12,7 +12,8 @@ const GUI = ({title = 'Camera', animation, zoom, setZoom}) => (
             left: 40,
             right: 40,
             color: 'white',
-            zIndex: 1000
+            zIndex: 1000,
+            pointerEvents: 'none'
         }}
         onClick={e => e.stopPropagation()}
     >
@@ -21,7 +22,7 @@ const GUI = ({title = 'Camera', animation, zoom, setZoom}) => (
         </Typography>
         <div style={{display: 'flex', alignItems: 'center'}}>
             <IconButton
-                style={{color: 'white'}}
+                style={{color: 'white', pointerEvents: 'all'}}
                 component='div'
                 onClick={() => {
                     animation.start({

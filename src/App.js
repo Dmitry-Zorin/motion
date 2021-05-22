@@ -9,6 +9,7 @@ import Navigator from "./Navigator"
 import {numberOfCameras} from "./constants"
 import Video from "./Video"
 import CameraObjects from "./CameraObjects"
+import noCamera from "./cursors/no_camera.png"
 
 const theme = createMuiTheme({
     typography: {fontFamily: 'Nunito, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif'},
@@ -57,6 +58,8 @@ const App = () => {
                     </AnimateSharedLayout>
                 </Navigator>
             </div>
+            <img src={noCamera} style={{display: 'none'}} alt=''/>
+            <img src='/video_feed' style={{display: 'none'}} alt=''/>
         </ThemeProvider>
     )
 }

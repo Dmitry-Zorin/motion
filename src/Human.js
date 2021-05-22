@@ -13,7 +13,7 @@ const Human = ({num, index, height = 0.9 * window.innerHeight, large, setIsClose
         trainHeight = 115
     } else {
         size = 15
-        diff = 3
+        diff = 2
         trainHeight = 30
     }
 
@@ -23,7 +23,7 @@ const Human = ({num, index, height = 0.9 * window.innerHeight, large, setIsClose
     useEffect(() => {
         setIsCloseToDoors(e => {
             const newE = [...e]
-            newE[num] = y < trainHeight
+            newE[num] = y > 0 && y < trainHeight
             return newE[num] === e[num] ? e : newE
         })
     }, [num, setIsCloseToDoors, trainHeight, y])

@@ -28,7 +28,11 @@ const CameraLarge = ({children, index, cam, setActiveCam, video}) => {
         let y = translateY + (element.clientY - window.innerHeight / 2 - translateY) * ratio
         if (newScale === 1) x = y = 0
 
-        animation.start({x, y, scale: newScale, cursor: newScale > 1 ? `url(${move}) 10 5, grab`: `url(${zoomIn}) 5 5, zoom-in`})
+        animation.start({
+            x, y,
+            scale: newScale,
+            cursor: newScale > 1 ? `url(${move}) 10 5, grab` : `url(${zoomIn}) 5 5, zoom-in`
+        })
             .then(() => {
                 setZoom(100 * newScale)
                 setElement(null)
@@ -68,6 +72,7 @@ const CameraLarge = ({children, index, cam, setActiveCam, video}) => {
             >
                 {children}
             </motion.div>
+            <img src={move} style={{display: 'none'}} alt=''/>
         </div>
     )
 }
