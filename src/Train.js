@@ -17,9 +17,9 @@ const Train = ({large, isCloseToDoors}) => {
             ref={train}
             style={{
                 width: '100%',
-                height: large ? 100 : 25,
-                borderBottom: `${large ? 12 : 3}px solid #${isAnyoneCloseToDoors ? 'BC4B51' : '659B5E'}`,
-                background: isAnyoneCloseToDoors ? '#C27779' : '#80AC7A',
+                height: large ? 140 : 35,
+                borderBottom: `${large ? 12 : 3}px solid rgba(0,0,0, 0.15)`,
+                background: isAnyoneCloseToDoors ? '#DA3917' : '#80AC7A',
                 position: 'absolute'
             }}
         />

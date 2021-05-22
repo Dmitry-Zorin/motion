@@ -1,4 +1,4 @@
-import {Grid, makeStyles} from "@material-ui/core"
+import {Grid, Hidden, makeStyles} from "@material-ui/core"
 import {createMuiTheme, ThemeProvider} from "@material-ui/core/styles"
 import {AnimatePresence, AnimateSharedLayout} from "framer-motion"
 import {useState} from "react"
@@ -10,6 +10,7 @@ import {numberOfCameras} from "./constants"
 import Video from "./Video"
 import CameraObjects from "./CameraObjects"
 import noCamera from "./images/no_camera.png"
+import rgd from './images/rgd.png'
 
 const theme = createMuiTheme({
     typography: {fontFamily: 'Nunito, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif'},
@@ -17,12 +18,19 @@ const theme = createMuiTheme({
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        paddingRight: theme.spacing(4)
+        padding: theme.spacing(4),
+        minHeight: `calc(100vh - ${2 * theme.spacing(4)}px)`
     }
 }))
 
 const cams = [...Array(numberOfCameras).keys()].map((_, i) => ({name: 'Camera ' + (i + 1)}))
 const video = {value: false}
+
+const Title = () => (
+    <div className='Title'>
+        <img src={rgd} className='Logo' alt='logo'/>
+    </div>
+)
 
 const App = () => {
     const classes = useStyles()
@@ -33,10 +41,26 @@ const App = () => {
             <div className={`${classes.container} App`}>
                 <Navigator>
                     <AnimateSharedLayout type='crossfade'>
-                        <Grid container spacing={4} style={{maxWidth: 1600, margin: 'auto'}}>
-                            {cams.map((c, i) => (
-                                <Grid item key={i} xs={12} sm={6} md={4} lg={3}>
-                                    <Camera index={i + 1} {...{setActiveCam, video}}/>
+                        <Grid container spacing={4}>
+                            <Hidden lgUp>
+                                <Grid item xs={12}>
+                                    <Title/>
+                                </Grid>
+                            </Hidden>
+                            <Grid item xs={12} sm={6} lg={3}>
+                                <Camera index={1} {...{setActiveCam, video}}/>
+                            </Grid>
+                            <Hidden mdDown>
+                                <Grid item lg={6}>
+                                    <Title/>
+                                </Grid>
+                            </Hidden>
+                            <Grid item xs={12} sm={6} lg={3}>
+                                <Camera index={2} {...{setActiveCam, video}}/>
+                            </Grid>
+                            {cams.slice(2).map((c, i) => (
+                                <Grid item key={i} xs={12} sm={6} lg={3}>
+                                    <Camera index={i + 3} {...{setActiveCam, video}}/>
                                 </Grid>
                             ))}
                         </Grid>

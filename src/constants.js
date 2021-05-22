@@ -1,2 +1,2 @@
-export const numberOfPeople = 4
-export const numberOfCameras = 16
+export const numberOfPeople = 3
+export const numberOfCameras = 10

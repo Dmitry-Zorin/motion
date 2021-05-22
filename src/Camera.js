@@ -1,4 +1,4 @@
-import {IconButton, makeStyles} from "@material-ui/core"
+import {IconButton, makeStyles, Typography} from "@material-ui/core"
 import {motion, useAnimation} from "framer-motion"
 import {useEffect, useRef, useState} from "react"
 import './Camera.css'
@@ -11,8 +11,11 @@ const useStyles = makeStyles((theme) => ({
         '&:hover': {
             boxShadow: theme.shadows[4],
             '& .overlay': {
-                background: 'rgba(0, 0, 0, 0.05)',
-                opacity: 0.9,
+                background: 'rgba(0, 0, 0, 0.1)',
+                opacity: 0.9
+            },
+            '& .title': {
+                opacity: 0.9
             }
         }
     },
@@ -23,9 +26,20 @@ const useStyles = makeStyles((theme) => ({
         opacity: 0.8,
         transition: 'all 0.2s ease',
         '&:hover': {
-            background: 'rgba(0, 0, 0, 0.1) !important',
-            opacity: '1 !important',
+            background: 'rgba(0, 0, 0, 0.15) !important',
+            opacity: '1 !important'
         }
+    },
+    title: {
+        position: 'absolute',
+        bottom: 16,
+        left: 0,
+        right: 0,
+        textAlign: 'center',
+        fontWeight: 600,
+        fontSize: 20,
+        pointerEvents: 'none',
+        opacity: 0.8
     }
 }))
 
@@ -35,7 +49,11 @@ const Camera = ({index, setActiveCam, video}) => {
     const [height, setHeight] = useState()
     const animation = useAnimation()
 
-    useEffect(() => setHeight(cam.current.offsetHeight), [])
+    useEffect(() => {
+        const offsetHeight = cam.current.offsetWidth * 9 / 16
+        cam.current.style.height = offsetHeight + 'px'
+        setHeight(offsetHeight)
+    }, [])
 
     return (
         <motion.div
@@ -59,6 +77,9 @@ const Camera = ({index, setActiveCam, video}) => {
             >
                 <VideocamIcon/>
             </IconButton>
+            <Typography className={`${classes.title} title`}>
+                Camera {index}
+            </Typography>
         </motion.div>
     )
 }

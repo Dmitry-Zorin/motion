@@ -7,12 +7,12 @@ const CameraObjects = ({index, large, height}) => {
     const [isCloseToDoors, setIsCloseToDoors] = useState([...Array(numberOfPeople).keys()].map(() => false))
 
     return (
-        <>
+        <div style={{width: '160vh'}}>
             <Train {...{large, isCloseToDoors}}/>
             {isCloseToDoors.map((_, i) => (
                 <Human key={i} num={i} {...{index, large, height, setIsCloseToDoors}}/>
             ))}
-        </>
+        </div>
     )
 }
 

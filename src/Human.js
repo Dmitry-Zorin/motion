@@ -10,11 +10,11 @@ const Human = ({num, index, height = 0.9 * window.innerHeight, large, setIsClose
     if (large) {
         size = 60
         diff = 6
-        trainHeight = 115
+        trainHeight = 146
     } else {
         size = 15
-        diff = 2
-        trainHeight = 30
+        diff = 3
+        trainHeight = 38
     }
 
     x = x * 16 / 9 * height - size / 2 + diff
@@ -23,7 +23,7 @@ const Human = ({num, index, height = 0.9 * window.innerHeight, large, setIsClose
     useEffect(() => {
         setIsCloseToDoors(e => {
             const newE = [...e]
-            newE[num] = y > 0 && y < trainHeight
+            newE[num] = y < trainHeight
             return newE[num] === e[num] ? e : newE
         })
     }, [num, setIsCloseToDoors, trainHeight, y])
@@ -36,7 +36,7 @@ const Human = ({num, index, height = 0.9 * window.innerHeight, large, setIsClose
                 height: size,
                 borderRadius: '100%',
                 background: 'white',
-                transition: 'transform 1s linear',
+                transition: 'transform 0.97s linear',
                 position: 'absolute'
             }}
         >
