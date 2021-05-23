@@ -13,13 +13,16 @@ const getRandomCoord = (coord) => (
 const Navigator = ({children}) => {
     const [coords, setCoords] = useState(globCoords)
 
+    const updateCoords = () => {
+        setCoords(globCoords = globCoords.map(arr => arr.map(c => ({
+            x: getRandomCoord(c.x),
+            y: getRandomCoord(c.y)
+        }))))
+    }
+
     useEffect(() => {
-        const interval = setInterval(() => {
-            setCoords(globCoords = globCoords.map(arr => arr.map(c => ({
-                x: getRandomCoord(c.x),
-                y: getRandomCoord(c.y)
-            }))))
-        }, 1000)
+        setTimeout(updateCoords, 0)
+        const interval = setInterval(updateCoords, 1000)
         return () => clearInterval(interval)
     }, [])
 
