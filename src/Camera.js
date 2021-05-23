@@ -53,6 +53,7 @@ const Camera = ({index, setActiveCam, video}) => {
         const offsetHeight = cam.current.offsetWidth * 9 / 16
         cam.current.style.height = offsetHeight + 'px'
         setHeight(offsetHeight)
+        cam.current.layoutId = index
     }
 
     useEffect(resize, [])
@@ -70,7 +71,6 @@ const Camera = ({index, setActiveCam, video}) => {
             onMouseOut={() => animation.start({scale: 1})}
             onClick={() => setActiveCam(index)}
             animate={animation}
-            layoutId={index}
         >
             {height && (
                 <CameraObjects {...{index, height}}/>
