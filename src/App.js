@@ -81,7 +81,6 @@ const App = () => {
                 </Navigator>
             </div>
             <img src={noCamera} style={{display: 'none'}} alt=''/>
-            <img src='/video_feed' style={{display: 'none'}} alt=''/>
         </ThemeProvider>
     )
 }
