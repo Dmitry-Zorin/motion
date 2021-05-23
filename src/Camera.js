@@ -1,6 +1,6 @@
 import {IconButton, makeStyles, Typography} from "@material-ui/core"
 import {motion, useAnimation} from "framer-motion"
-import {useEffect, useLayoutEffect, useRef, useState} from "react"
+import {useCallback, useEffect, useLayoutEffect, useRef, useState} from "react"
 import './Camera.css'
 import CameraObjects from "./CameraObjects"
 import VideocamIcon from "@material-ui/icons/Videocam"
@@ -49,19 +49,19 @@ const Camera = ({index, setActiveCam, video}) => {
     const [height, setHeight] = useState()
     const animation = useAnimation()
 
-    const resize = () => {
+    const resize = useCallback(() => {
         const offsetHeight = cam.current.offsetWidth * 9 / 16
         cam.current.style.height = offsetHeight + 'px'
         setHeight(offsetHeight)
         cam.current.layoutId = index
-    }
+    }, [index])
 
-    useEffect(resize, [])
+    useEffect(resize, [resize])
 
     useLayoutEffect(() => {
         window.addEventListener('resize', resize)
         return () => window.removeEventListener('resize', resize)
-    }, [])
+    }, [resize])
 
     return (
         <motion.div
