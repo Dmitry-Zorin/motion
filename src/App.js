@@ -43,29 +43,29 @@ const App = () => {
             <div className={`${classes.container} App`}>
                 <Navigator>
                     <AnimateSharedLayout type='crossfade'>
-                        <Grid container spacing={4}>
-                            <Hidden lgUp>
-                                <Grid item xs={12}>
-                                    <Title/>
+                            <Grid container spacing={4}>
+                                <Hidden lgUp>
+                                    <Grid item xs={12}>
+                                        <Title/>
+                                    </Grid>
+                                </Hidden>
+                                <Grid item xs={12} sm={6} lg={3}>
+                                    <Camera index={1} cam={cams[0]} {...{setActiveCam, video}}/>
                                 </Grid>
-                            </Hidden>
-                            <Grid item xs={12} sm={6} lg={3}>
-                                <Camera index={1} cam={cams[0]} {...{setActiveCam, video}}/>
+                                <Hidden mdDown>
+                                    <Grid item lg={6}>
+                                        <Title/>
+                                    </Grid>
+                                </Hidden>
+                                <Grid item xs={12} sm={6} lg={3}>
+                                    <Camera index={2} cam={cams[1]} {...{setActiveCam, video}}/>
+                                </Grid>
+                                {cams.slice(2).map((c, i) => (
+                                    <Grid item key={i} xs={12} sm={6} lg={3}>
+                                        <Camera index={i + 3} cam={c} {...{setActiveCam, video}}/>
+                                    </Grid>
+                                ))}
                             </Grid>
-                            <Hidden mdDown>
-                                <Grid item lg={6}>
-                                    <Title/>
-                                </Grid>
-                            </Hidden>
-                            <Grid item xs={12} sm={6} lg={3}>
-                                <Camera index={2} cam={cams[1]} {...{setActiveCam, video}}/>
-                            </Grid>
-                            {cams.slice(2).map((c, i) => (
-                                <Grid item key={i} xs={12} sm={6} lg={3}>
-                                    <Camera index={i + 3} cam={c} {...{setActiveCam, video}}/>
-                                </Grid>
-                            ))}
-                        </Grid>
                         <Hidden smDown>
                             <AnimatePresence>
                                 {activeCam && (

@@ -48,13 +48,14 @@ const Camera = ({index, setActiveCam, video}) => {
     const cam = useRef()
     const [height, setHeight] = useState()
     const animation = useAnimation()
+    const [pageLoaded, setPageLoaded] = useState(false)
 
     const resize = useCallback(() => {
+        if (!pageLoaded) return setPageLoaded(true)
         const offsetHeight = cam.current.offsetWidth * 9 / 16
         cam.current.style.height = offsetHeight + 'px'
         setHeight(offsetHeight)
-        cam.current.layoutId = index
-    }, [index])
+    }, [pageLoaded])
 
     useEffect(resize, [resize])
 
@@ -63,7 +64,7 @@ const Camera = ({index, setActiveCam, video}) => {
         return () => window.removeEventListener('resize', resize)
     }, [resize])
 
-    return (
+    return pageLoaded && (
         <motion.div
             ref={cam}
             className={`${classes.card} Camera`}
@@ -71,6 +72,7 @@ const Camera = ({index, setActiveCam, video}) => {
             onMouseOut={() => animation.start({scale: 1})}
             onClick={() => setActiveCam(index)}
             animate={animation}
+            layoutId={index}
         >
             {height && (
                 <CameraObjects {...{index, height}}/>
