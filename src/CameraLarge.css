@@ -17,6 +17,7 @@
 
 .CameraLarge {
     height: 90vh;
+    max-width: 90vw;
     border-radius: 25px;
     position: absolute;
     z-index: 3;

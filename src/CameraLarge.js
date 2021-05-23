@@ -5,8 +5,10 @@ import './CameraLarge.css'
 import GUI from "./GUI"
 import move from './images/move.svg'
 import zoomIn from './images/zoomIn.svg'
+import Video from "./Video"
+import CameraObjects from "./CameraObjects"
 
-const CameraLarge = ({children, index, cam, setActiveCam, video}) => {
+const CameraLarge = ({index, cam, setActiveCam, video}) => {
     const [zoom, setZoom] = useState(100)
     const [element, setElement] = useState()
     const animation = useAnimation()
@@ -40,7 +42,10 @@ const CameraLarge = ({children, index, cam, setActiveCam, video}) => {
     }, [animation, element, setElement])
 
     return (
-        <div className='Container' onWheel={e => !element && setElement(e)}>
+        <div
+            className='Container'
+            onWheel={e => !element && setElement(e)}
+        >
             <motion.div
                 initial={{opacity: 0}}
                 animate={{opacity: 1}}
@@ -70,7 +75,11 @@ const CameraLarge = ({children, index, cam, setActiveCam, video}) => {
                 onClick={e => zoom === 100 && !element && setElement(e)}
                 style={{aspectRatio: video.value && 'unset'}}
             >
-                {children}
+                {video.value ? (
+                    <Video {...{index}}/>
+                ) : (
+                    <CameraObjects {...{index}} large/>
+                )}
             </motion.div>
             <img src={move} style={{display: 'none'}} alt=''/>
         </div>

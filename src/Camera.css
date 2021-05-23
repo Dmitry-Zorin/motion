@@ -4,15 +4,5 @@
     overflow: hidden;
     border-radius: 20px;
     cursor: pointer;
-}
-
-.Camera:before {
-    content: '';
-    background: red;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    opacity: 0.0;
+    transition: height 0.2s ease 0.4s;
 }

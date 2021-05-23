@@ -1,14 +1,12 @@
 import {Grid, Hidden, makeStyles} from "@material-ui/core"
 import {createMuiTheme, ThemeProvider} from "@material-ui/core/styles"
 import {AnimatePresence, AnimateSharedLayout} from "framer-motion"
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import './App.css'
 import Camera from "./Camera"
 import CameraLarge from "./CameraLarge"
 import Navigator from "./Navigator"
 import {numberOfCameras} from "./constants"
-import Video from "./Video"
-import CameraObjects from "./CameraObjects"
 import noCamera from "./images/no_camera.png"
 import rgd from './images/rgd.png'
 
@@ -23,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const cams = [...Array(numberOfCameras).keys()].map((_, i) => ({name: 'Camera ' + (i + 1)}))
+const cams = [...Array(numberOfCameras).keys()].map((_, i) => ({name: 'Камера ' + (i + 1)}))
 const video = {value: false}
 
 const Title = () => (
@@ -35,6 +33,10 @@ const Title = () => (
 const App = () => {
     const classes = useStyles()
     const [activeCam, setActiveCam] = useState()
+
+    useEffect(() => {
+        document.body.style.overflowY = activeCam ? 'hidden' : 'scroll'
+    }, [activeCam])
 
     return (
         <ThemeProvider theme={theme}>
@@ -48,7 +50,7 @@ const App = () => {
                                 </Grid>
                             </Hidden>
                             <Grid item xs={12} sm={6} lg={3}>
-                                <Camera index={1} {...{setActiveCam, video}}/>
+                                <Camera index={1} cam={cams[0]} {...{setActiveCam, video}}/>
                             </Grid>
                             <Hidden mdDown>
                                 <Grid item lg={6}>
@@ -56,29 +58,25 @@ const App = () => {
                                 </Grid>
                             </Hidden>
                             <Grid item xs={12} sm={6} lg={3}>
-                                <Camera index={2} {...{setActiveCam, video}}/>
+                                <Camera index={2} cam={cams[1]} {...{setActiveCam, video}}/>
                             </Grid>
                             {cams.slice(2).map((c, i) => (
                                 <Grid item key={i} xs={12} sm={6} lg={3}>
-                                    <Camera index={i + 3} {...{setActiveCam, video}}/>
+                                    <Camera index={i + 3} cam={c} {...{setActiveCam, video}}/>
                                 </Grid>
                             ))}
                         </Grid>
-                        <AnimatePresence>
-                            {activeCam && (
-                                <CameraLarge
-                                    index={activeCam}
-                                    cam={cams[activeCam - 1]}
-                                    {...{setActiveCam, video}}
-                                >
-                                    {video.value ? (
-                                        <Video index={activeCam}/>
-                                    ) : (
-                                        <CameraObjects index={activeCam} large/>
-                                    )}
-                                </CameraLarge>
-                            )}
-                        </AnimatePresence>
+                        <Hidden smDown>
+                            <AnimatePresence>
+                                {activeCam && (
+                                    <CameraLarge
+                                        index={activeCam}
+                                        cam={cams[activeCam - 1]}
+                                        {...{setActiveCam, video}}
+                                    />
+                                )}
+                            </AnimatePresence>
+                        </Hidden>
                     </AnimateSharedLayout>
                 </Navigator>
             </div>

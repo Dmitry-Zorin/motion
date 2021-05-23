@@ -1,7 +1,7 @@
 import {IconButton, Typography} from "@material-ui/core"
 import YoutubeSearchedForIcon from "@material-ui/icons/YoutubeSearchedFor"
 
-const GUI = ({title = 'Camera', animation, zoom, setZoom}) => (
+const GUI = ({title = 'Камера', animation, zoom, setZoom}) => (
     <div
         style={{
             position: 'absolute',
@@ -36,7 +36,7 @@ const GUI = ({title = 'Camera', animation, zoom, setZoom}) => (
                 <YoutubeSearchedForIcon fontSize='large'/>
             </IconButton>
             <Typography variant='h4'>
-                Zoom: {Math.floor(zoom / 5) * 5}%
+                Увеличение: {Math.floor(zoom / 5) * 5}%
             </Typography>
         </div>
     </div>

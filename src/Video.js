@@ -9,14 +9,14 @@ const Video = () => {
         <>
             <img
                 src='video_feed'
-                alt='No video feed'
+                alt=''
                 height='100%'
                 style={{pointerEvents: 'none', display}}
                 onError={() => setDisplay('none')}
             />
             <img
                 src={noCamera}
-                alt='No video feed'
+                alt='Поток данных с камеры отсутствует'
                 height='100%'
                 style={{pointerEvents: 'none'}}
             />
