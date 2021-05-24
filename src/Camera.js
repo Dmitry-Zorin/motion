@@ -1,4 +1,4 @@
-import {IconButton, makeStyles, Typography} from "@material-ui/core"
+import {IconButton, makeStyles, Typography, useMediaQuery, useTheme} from "@material-ui/core"
 import {motion, useAnimation} from "framer-motion"
 import {useCallback, useEffect, useLayoutEffect, useRef, useState} from "react"
 import './Camera.css'
@@ -49,6 +49,8 @@ const Camera = ({index, setActiveCam, video}) => {
     const [height, setHeight] = useState()
     const animation = useAnimation()
     const [pageLoaded, setPageLoaded] = useState(false)
+    const theme = useTheme()
+    const isMdUp = useMediaQuery(theme.breakpoints.up('md'))
 
     const resize = useCallback(() => {
         if (!pageLoaded) return setPageLoaded(true)
@@ -70,7 +72,7 @@ const Camera = ({index, setActiveCam, video}) => {
             className={`${classes.card} Camera`}
             onMouseOver={() => animation.start({scale: 1.05})}
             onMouseOut={() => animation.start({scale: 1})}
-            onClick={() => setActiveCam(index)}
+            onClick={() => isMdUp && setActiveCam(index)}
             animate={animation}
             layoutId={index}
         >
@@ -80,6 +82,7 @@ const Camera = ({index, setActiveCam, video}) => {
             <IconButton
                 className={`${classes.overlay} overlay`}
                 onClick={() => {
+                    if (!isMdUp) return
                     setActiveCam(index)
                     video.value = true
                 }}

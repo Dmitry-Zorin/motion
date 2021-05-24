@@ -8,6 +8,7 @@ const Train = ({large, height, isCloseToDoors}) => {
 
     useEffect(() => {
         setTimeout(() => {
+            if (!train.current) return
             train.current.style.transition = 'all 0.2s ease 0.4s'
         }, 1000)
     }, [])

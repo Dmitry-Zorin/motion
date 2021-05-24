@@ -33,7 +33,9 @@ const CameraLarge = ({index, cam, setActiveCam, video}) => {
         animation.start({
             x, y,
             scale: newScale,
-            cursor: newScale > 1 ? `url(${move}) 10 5, grab` : `url(${zoomIn}) 5 5, zoom-in`
+            cursor: newScale > 1
+                ? `url(${move}) 10 5, grab`
+                : `url(${zoomIn}) 5 5, zoom-in`
         })
             .then(() => {
                 setZoom(100 * newScale)

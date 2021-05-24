@@ -5,10 +5,10 @@ import {useEffect, useState} from "react"
 import './App.css'
 import Camera from "./Camera"
 import CameraLarge from "./CameraLarge"
-import Navigator from "./Navigator"
 import {numberOfCameras} from "./constants"
 import noCamera from "./images/no_camera.png"
 import rgd from './images/rgd.png'
+import Navigator from "./Navigator"
 
 const theme = createMuiTheme({
     typography: {fontFamily: 'Nunito, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif'},
@@ -43,40 +43,38 @@ const App = () => {
             <div className={`${classes.container} App`}>
                 <Navigator>
                     <AnimateSharedLayout type='crossfade'>
-                            <Grid container spacing={4}>
-                                <Hidden lgUp>
-                                    <Grid item xs={12}>
-                                        <Title/>
-                                    </Grid>
-                                </Hidden>
-                                <Grid item xs={12} sm={6} lg={3}>
-                                    <Camera index={1} cam={cams[0]} {...{setActiveCam, video}}/>
+                        <Grid container spacing={4} style={{maxWidth: 2000}}>
+                            <Hidden lgUp>
+                                <Grid item xs={12}>
+                                    <Title/>
                                 </Grid>
-                                <Hidden mdDown>
-                                    <Grid item lg={6}>
-                                        <Title/>
-                                    </Grid>
-                                </Hidden>
-                                <Grid item xs={12} sm={6} lg={3}>
-                                    <Camera index={2} cam={cams[1]} {...{setActiveCam, video}}/>
-                                </Grid>
-                                {cams.slice(2).map((c, i) => (
-                                    <Grid item key={i} xs={12} sm={6} lg={3}>
-                                        <Camera index={i + 3} cam={c} {...{setActiveCam, video}}/>
-                                    </Grid>
-                                ))}
+                            </Hidden>
+                            <Grid item xs={12} sm={6} lg={3}>
+                                <Camera index={1} cam={cams[0]} {...{setActiveCam, video}}/>
                             </Grid>
-                        <Hidden smDown>
-                            <AnimatePresence>
-                                {activeCam && (
-                                    <CameraLarge
-                                        index={activeCam}
-                                        cam={cams[activeCam - 1]}
-                                        {...{setActiveCam, video}}
-                                    />
-                                )}
-                            </AnimatePresence>
-                        </Hidden>
+                            <Hidden mdDown>
+                                <Grid item lg={6}>
+                                    <Title/>
+                                </Grid>
+                            </Hidden>
+                            <Grid item xs={12} sm={6} lg={3}>
+                                <Camera index={2} cam={cams[1]} {...{setActiveCam, video}}/>
+                            </Grid>
+                            {cams.slice(2).map((c, i) => (
+                                <Grid item key={i} xs={12} sm={6} lg={3}>
+                                    <Camera index={i + 3} cam={c} {...{setActiveCam, video}}/>
+                                </Grid>
+                            ))}
+                        </Grid>
+                        <AnimatePresence>
+                            {activeCam && (
+                                <CameraLarge
+                                    index={activeCam}
+                                    cam={cams[activeCam - 1]}
+                                    {...{setActiveCam, video}}
+                                />
+                            )}
+                        </AnimatePresence>
                     </AnimateSharedLayout>
                 </Navigator>
             </div>
