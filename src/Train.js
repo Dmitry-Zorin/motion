@@ -1,30 +1,30 @@
-import {motion} from "framer-motion"
-import {useEffect, useRef} from "react"
+import { motion } from 'framer-motion'
+import { useEffect, useRef } from 'react'
 
-const Train = ({large, height, isCloseToDoors}) => {
-    const train = useRef()
+const Train = ({ large, height, isCloseToDoors }) => {
+	const train = useRef()
 
-    const isAnyoneCloseToDoors = isCloseToDoors.some(e => e)
+	const isAnyoneCloseToDoors = isCloseToDoors.some((e) => e)
 
-    useEffect(() => {
-        setTimeout(() => {
-            if (!train.current) return
-            train.current.style.transition = 'all 0.2s ease 0.4s'
-        }, 1000)
-    }, [])
+	useEffect(() => {
+		setTimeout(() => {
+			if (!train.current) return
+			train.current.style.transition = 'all 0.2s ease 0.4s'
+		}, 1000)
+	}, [])
 
-    return (
-        <motion.div
-            ref={train}
-            style={{
-                width: '100%',
-                height: large ? '15vh' : height / 6,
-                borderBottom: `${large ? 12 : 3}px solid rgba(0,0,0, 0.15)`,
-                background: isAnyoneCloseToDoors ? '#DA3917' : '#80AC7A',
-                position: 'absolute'
-            }}
-        />
-    )
+	return (
+		<motion.div
+			ref={train}
+			style={{
+				width: '100%',
+				height: large ? '15vh' : height / 6,
+				borderBottom: `${large ? 12 : 3}px solid rgba(0,0,0, 0.15)`,
+				background: isAnyoneCloseToDoors ? '#DA3917' : '#80AC7A',
+				position: 'absolute',
+			}}
+		/>
+	)
 }
 
 export default Train

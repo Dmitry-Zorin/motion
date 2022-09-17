@@ -21,5 +21,4 @@
     border-radius: 25px;
     position: absolute;
     z-index: 3;
-    cursor: url('images/zoomIn.svg') 5 5, zoom-in;
 }
