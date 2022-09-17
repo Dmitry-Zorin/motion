@@ -51,17 +51,11 @@ const Camera = ({ index, setActiveCam, video }) => {
 				animate={animation}
 				layoutId={index}
 				sx={(theme) => ({
-					card: {
-						boxShadow: theme.shadows[2],
-						'&:hover': {
-							boxShadow: theme.shadows[4],
-							'& .overlay': {
-								background: 'rgba(0, 0, 0, 0.1)',
-								opacity: 0.9,
-							},
-							'& .title': {
-								opacity: 0.9,
-							},
+					boxShadow: theme.shadows[2],
+					'&:hover': {
+						boxShadow: theme.shadows[4],
+						'& .title': {
+							opacity: 1,
 						},
 					},
 				})}
@@ -89,7 +83,7 @@ const Camera = ({ index, setActiveCam, video }) => {
 					<VideocamIcon />
 				</IconButton>
 				<Typography
-					className={`title`}
+					className="title"
 					sx={{
 						position: 'absolute',
 						bottom: 16,
@@ -99,7 +93,7 @@ const Camera = ({ index, setActiveCam, video }) => {
 						fontWeight: 500,
 						fontSize: 16,
 						pointerEvents: 'none',
-						opacity: 0.8,
+						opacity: 0.6,
 					}}
 				>
 					Камера {index}
